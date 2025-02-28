@@ -15,9 +15,10 @@ export const ContentTypeSchema = z.object({
   fields: z.array(FieldSchema),
 });
 
-// Globales CMS-Konfigurationsschema
+// Globales CMS-Konfigurationsschema, jetzt mit MediaFolder
 export const CMSConfigSchema = z.object({
   baseFolder: z.string().default('content'), // Globaler Base-Path im Repository
+  mediaFolder: z.string().default('public/media'), // Pfad zur Mediathek
   contentTypes: z.array(ContentTypeSchema),
   mdxComponents: z.record(z.string()),
 });
@@ -27,6 +28,7 @@ export type CMSConfig = z.infer<typeof CMSConfigSchema>;
 // Beispielhafte Konfiguration – hier definieren wir die Content-Typen
 export const cmsConfig: CMSConfig = {
   baseFolder: 'content',
+  mediaFolder: 'public/media',
   contentTypes: [
     {
       id: 'page',
